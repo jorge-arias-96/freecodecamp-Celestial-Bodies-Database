@@ -44,6 +44,42 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: fictial_moons; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.fictial_moons (
+    fictial_moons_id integer NOT NULL,
+    name character varying(20) NOT NULL,
+    description text,
+    planet_id integer
+);
+
+
+ALTER TABLE public.fictial_moons OWNER TO freecodecamp;
+
+--
+-- Name: fictial_moons_fictial_moon_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
+--
+
+CREATE SEQUENCE public.fictial_moons_fictial_moon_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.fictial_moons_fictial_moon_id_seq OWNER TO freecodecamp;
+
+--
+-- Name: fictial_moons_fictial_moon_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
+--
+
+ALTER SEQUENCE public.fictial_moons_fictial_moon_id_seq OWNED BY public.fictial_moons.fictial_moons_id;
+
+
+--
 -- Name: galaxy; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -197,6 +233,13 @@ ALTER SEQUENCE public.star_star_id_seq OWNED BY public.star.star_id;
 
 
 --
+-- Name: fictial_moons fictial_moons_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.fictial_moons ALTER COLUMN fictial_moons_id SET DEFAULT nextval('public.fictial_moons_fictial_moon_id_seq'::regclass);
+
+
+--
 -- Name: galaxy galaxy_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
@@ -225,6 +268,15 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 
 
 --
+-- Data for Name: fictial_moons; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.fictial_moons VALUES (1, 'ghomrassen', 'primary', 10);
+INSERT INTO public.fictial_moons VALUES (2, 'guermessa', 'secondary', 10);
+INSERT INTO public.fictial_moons VALUES (3, 'chenini', 'elliptical orbit', 10);
+
+
+--
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
@@ -240,6 +292,26 @@ INSERT INTO public.galaxy VALUES (6, 'messier 82', 'bright blue disk', 11.42, 13
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.moon VALUES (1, 'moon', 'spherical and rocky ', 0.3844, 3);
+INSERT INTO public.moon VALUES (2, 'phobos', 'small irregularly shaped', 77.79, 4);
+INSERT INTO public.moon VALUES (3, 'deimos', ' tiny, irregularly shaped', 77.79, 4);
+INSERT INTO public.moon VALUES (4, 'europa', 'made of silicate rock and has a water-ice', 628.3, 5);
+INSERT INTO public.moon VALUES (5, 'ganymede', 'body with an iron-rich, liquid metallic core', 628.3, 5);
+INSERT INTO public.moon VALUES (6, 'io', 'silicate rock surrounding a molten iron', 628.3, 5);
+INSERT INTO public.moon VALUES (7, 'callisto', 'made up of mostly rock and ice', 628.3, 5);
+INSERT INTO public.moon VALUES (8, 'amalthea', 'reddish, irregularly shaped', 628.3, 5);
+INSERT INTO public.moon VALUES (9, 'thebe', 'irregularly shaped and reddish', 628.3, 5);
+INSERT INTO public.moon VALUES (10, 'titan', 'icy world and a golden hazy atmosphere', 746, 6);
+INSERT INTO public.moon VALUES (11, 'enceladus', 'icy covered in ice and geysers', 1272, 6);
+INSERT INTO public.moon VALUES (12, 'mimas', 'covered in craters and low density', 1272, 6);
+INSERT INTO public.moon VALUES (13, 'dione', 'covered in craters and a wispy terrain', 1272, 6);
+INSERT INTO public.moon VALUES (14, 'lapetus', 'striking contrast in surface brightness.', 1272, 6);
+INSERT INTO public.moon VALUES (15, 'umbriel', 'darkest and third largest of its moons', 2867.6, 7);
+INSERT INTO public.moon VALUES (16, 'titania', 'covered in craters and valleys', 2723, 7);
+INSERT INTO public.moon VALUES (17, 'miranda', 'Slightly nonspherical in shape', 2723, 7);
+INSERT INTO public.moon VALUES (18, 'oberon', 'covered in craters', 2723, 7);
+INSERT INTO public.moon VALUES (19, 'ariel', 'brightest moon of uranus', 2723, 7);
+INSERT INTO public.moon VALUES (20, 'charon', 'half the size of Pluto', 5411, 8);
 
 
 --
@@ -275,6 +347,13 @@ INSERT INTO public.star VALUES (8, 'star wars', 'movie', 1800, 5000, 3000, 3);
 
 
 --
+-- Name: fictial_moons_fictial_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.fictial_moons_fictial_moon_id_seq', 3, true);
+
+
+--
 -- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
@@ -285,7 +364,7 @@ SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 6, true);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 21, true);
 
 
 --
@@ -300,6 +379,22 @@ SELECT pg_catalog.setval('public.planet_planet_id_seq', 12, true);
 --
 
 SELECT pg_catalog.setval('public.star_star_id_seq', 9, true);
+
+
+--
+-- Name: fictial_moons fictial_moons_fictial_moons_id_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.fictial_moons
+    ADD CONSTRAINT fictial_moons_fictial_moons_id_key UNIQUE (fictial_moons_id);
+
+
+--
+-- Name: fictial_moons fictial_moons_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.fictial_moons
+    ADD CONSTRAINT fictial_moons_pkey PRIMARY KEY (fictial_moons_id);
 
 
 --
@@ -364,6 +459,14 @@ ALTER TABLE ONLY public.star
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_star_id_key UNIQUE (star_id);
+
+
+--
+-- Name: fictial_moons fictial_moons_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.fictial_moons
+    ADD CONSTRAINT fictial_moons_planet_id_fkey FOREIGN KEY (planet_id) REFERENCES public.planet(planet_id);
 
 
 --
